@@ -1,0 +1,55 @@
+@extends('layouts.master')
+@section('title','crud')
+@section('content')
+<div class="container-fluid pt-4">
+         <div class="card">
+           <div class="card-header">
+<h1 >view category 
+  <a href="{{url('admin/add-category')}}" class="btn btn-sm btn-primary float-end"> Category</a>
+</h1>
+</div>
+<div class="card-body">
+  @if (session('message'))
+       <div class="alert alert-sucess">{{ session('message') }}</div>
+  @endif
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>category Name</th>
+        <th>Image</th>
+       
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+
+    </thead>
+    <tbody>
+      
+        @foreach($category as $item )
+        <tr> 
+          <td>{{$item->id}}</td>
+          <td>{{$item->name}}</td>
+          <td>{{$item->image}}
+            <img src="{{asset('uploads/category/'.$item->image)}}" width="50px" height="50px" alt="img">
+          </td>
+         <td>
+          <a href="{{url('admin/edit-category/'.$item->id)}}" class="btn btn-primary">Edit</a>
+          </td>
+          <td>
+          <a href="{{url('admin/delete-category/'.$item->id)}}" class="btn btn-danger">Delete</a>
+          </td>
+      </tr>
+
+        @endforeach
+       
+    </tbody>
+
+  </table>
+
+                       
+</div>
+</div>
+</div>
+@endsection
